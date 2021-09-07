@@ -21,7 +21,7 @@
 ## Features
 
 - **Microscopic:** ~175 B minzipped!
-- **Simple API:** just `provide` and `use`
+- **Simple:** just `provide` and `use`
 - **Fancy:** contextus is Latin for context!
 
 ## Install

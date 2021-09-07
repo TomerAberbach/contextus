@@ -62,7 +62,18 @@ const returnValue = myContext.provide(`Spectacular!`, a)
 
 console.log(returnValue)
 //=> Amazing!
+
+try {
+  myContext.use()
+} catch (e) {
+  console.log(e.message)
+}
+//=> context: use called outside provide
 ```
+
+See the
+[type definitions](https://github.com/TomerAberbach/contextus/blob/main/src/index.d.ts)
+for more documentation.
 
 ## Contributing
 

@@ -22,6 +22,7 @@
 
 - **Microscopic:** ~175 B minzipped!
 - **Simple:** just `provide` and `use`
+- **Powerful:** supports context nesting
 - **Fancy:** contextus is Latin for context!
 
 ## Install
@@ -55,9 +56,17 @@ function d() {
   const value = myContext.use()
 
   console.log(`d: ${value}`)
+  myContext.provide(`More specific wins!`, e)
+  console.log(`d: ${value}`)
+}
+
+function e() {
+  console.log(`e: ${myContext.use()}`)
 }
 
 const returnValue = myContext.provide(`Spectacular!`, a)
+//=> d: Spectacular!
+//=> e: More specific wins!
 //=> d: Spectacular!
 
 console.log(returnValue)

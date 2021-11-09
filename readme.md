@@ -20,7 +20,7 @@
 
 ## Features
 
-- **Microscopic:** ~175 B minzipped!
+- **Microscopic:** ~300 B minzipped!
 - **Simple:** just `provide` and `use`
 - **Powerful:** supports context nesting
 - **Fancy:** contextus is Latin for context!

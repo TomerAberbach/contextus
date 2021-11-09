@@ -15,14 +15,26 @@
  */
 
 /** Creates a new context and returns it. */
-declare const context: <Value>() => Context<Value>
+declare const context: {
+  <Value>(): Context<Value>
+
+  /**
+   * Creates a new singleton context and returns it.
+   *
+   * Only a single value can be provided by a singleton context at any given
+   * time. Contexts cannot be nested.
+   */
+  singleton<Value>(): Context<Value>
+}
 
 /** A context that holds values of type `Value`. */
 export type Context<Value> = {
   /**
    * Calls `fn` with the given `value` provided to it, meaning that calls to the
    * `use` method of this context will return the given `value` when called
-   * transitively within `fn`. Returns the return value from calling `fn`.
+   * transitively within `fn`. Singleton contexts will await the return value if
+   * it is thenable before stopping provision. Returns the return value from
+   * calling `fn`.
    */
   provide<ReturnValue>(value: Value, fn: () => ReturnValue): ReturnValue
 

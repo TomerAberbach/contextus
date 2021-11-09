@@ -22,3 +22,9 @@ const c = context<string>()
 expectType<Context<string>>(c)
 expectType<number>(c.provide(`hello`, () => 2))
 expectType<string>(c.use())
+
+const s = context.singleton<number>()
+
+expectType<Context<number>>(s)
+expectType<number>(s.provide(5, () => 2))
+expectType<number>(s.use())

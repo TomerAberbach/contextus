@@ -36,4 +36,46 @@ const context = () => {
   }
 }
 
+context.singleton = () => {
+  let holder
+
+  return {
+    provide(value, fn) {
+      if (holder) {
+        throw new Error(`context: provide called in provide for singleton`)
+      }
+
+      holder = { value }
+
+      let result
+      try {
+        result = fn()
+      } catch (error) {
+        holder = undefined
+        throw error
+      }
+
+      if (!result || typeof result.then !== `function`) {
+        holder = undefined
+        return result
+      }
+
+      return (async () => {
+        try {
+          return await result
+        } finally {
+          holder = undefined
+        }
+      })()
+    },
+    use() {
+      if (!holder) {
+        throw new Error(`context: use called outside provide`)
+      }
+
+      return holder.value
+    },
+  }
+}
+
 export default context
